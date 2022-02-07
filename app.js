@@ -2,15 +2,22 @@ const express = require("express");
 const { create } = require("./database/models/Event");
 const Event = require("./database/models/Event");
 const connectDB = require("./database/database");
-
+const dotenv = require("dotenv");
+dotenv.config();
 const app = express();
-
-const PORT = 8000;
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Hello");
 });
-
+app.get("/events", async (req, res) => {
+  try {
+    const events = await Event.find();
+    res.json(events);
+  } catch (error) {
+    res.status(400).json({ msg: "Internal server error" });
+  }
+});
 app.post("/events", async (req, res) => {
   try {
     const event = req.body;
@@ -21,8 +28,8 @@ app.post("/events", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log("Server is listening", PORT);
+app.listen(process.env.PORT, () => {
+  console.log("Server is listening", process.env.PORT);
 });
 
 connectDB();
