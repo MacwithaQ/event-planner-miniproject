@@ -12,14 +12,14 @@ const EventSchema = new Schema(
     },
     name: {
       type: String,
-      validate: {
-        validator: function (v) {
-          if (v.include("event")) {
-            return v; // check that there is a name object
-          }
-        },
-        message: "Name can't contain the word event in it.",
-      },
+      // validate: {
+      //   validator: function (v) {
+      //     if (v.include("event")) {
+      //       return v; // check that there is a name object
+      //     }
+      //   },
+      //   message: "Name can't contain the word event in it.",
+      // },
     },
     email: {
       type: String,
@@ -38,7 +38,7 @@ const EventSchema = new Schema(
     bookedSeats: {
       type: Number,
       default: 0,
-      max: 5,
+      max: 10,
     },
     startDate: {
       type: Date,
