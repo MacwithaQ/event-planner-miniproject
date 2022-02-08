@@ -5,6 +5,7 @@ const {
   getDeleteEvent,
   getSingleEvent,
   getUpdateEvent,
+  getFullyBookedEvents,
 } = require("./controllers");
 
 const eventsRouter = express.Router();
@@ -19,5 +20,7 @@ eventsRouter.post("/", getCreateEvent);
 eventsRouter.delete("/:eventId", getDeleteEvent);
 // UPDATE EVENT
 eventsRouter.put("/:eventId", getUpdateEvent);
+// FETCH FULLY BOOKED EVENTS
+eventsRouter.get("/view/fullevents", getFullyBookedEvents);
 
 module.exports = eventsRouter;

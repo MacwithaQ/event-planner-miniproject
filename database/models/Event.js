@@ -44,7 +44,11 @@ const EventSchema = new Schema(
     bookedSeats: {
       type: Number,
       default: 0,
-      max: this.numOfSeats,
+      validate: {
+        validator: function (v) {
+          return v <= this.numOfSeats;
+        },
+      },
     },
     startDate: {
       type: Date,

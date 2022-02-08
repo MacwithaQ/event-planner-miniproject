@@ -55,12 +55,24 @@ const getUpdateEvent = async (req, res) => {
   const { eventId } = req.params;
   const eventupdate = req.body;
   try {
-    const updatedEvent = await Product.findByIdAndUpdate(eventId, eventupdate);
+    const updatedEvent = await Product.findByIdAndUpdate(eventId, eventupdate, {
+      new: true,
+    });
     res
       .status(200)
       .json({ msg: "Updated successfully", payload: updatedEvent });
   } catch (error) {
     res.status(400).json({ msg: error.msg });
+  }
+};
+
+const getFullyBookedEvents = async (req, res) => {
+  try {
+    let events = await Event.find();
+    events = events.filter((event) => event.bookedSeats === event.numOfSeats);
+    res.status(200).json(events);
+  } catch (error) {
+    console.error(error);
   }
 };
 
@@ -70,4 +82,5 @@ module.exports = {
   getDeleteEvent,
   getSingleEvent,
   getUpdateEvent,
+  getFullyBookedEvents,
 };

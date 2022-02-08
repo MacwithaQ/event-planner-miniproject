@@ -1,6 +1,4 @@
 const express = require("express");
-const { create } = require("./database/models/Event");
-const Event = require("./database/models/Event");
 const connectDB = require("./database/database");
 const dotenv = require("dotenv");
 const eventsRouter = require("./apis/routes");
